@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vallor Automação</title>
+<link rel="icon" href="img/va.svg" type="image/svg+xml">
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Vallor Automação: software de PDV, consultoria e suporte 365 dias para restaurantes. Especialistas em food service desde 1996, em Belo Horizonte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,11 +288,32 @@ section{scroll-margin-top:84px}
 @keyframes ring{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
 
 .intro{display:none}
-.has-intro .intro{display:grid;place-items:center;position:fixed;inset:0;z-index:200;background:var(--navy-deep);animation:introSafe .01s linear 3.4s forwards}
-.intro-in{display:grid;gap:22px;justify-items:center}
-.intro img{width:min(240px,56vw)}
-.intro-bar{width:min(240px,56vw);height:3px;background:rgba(255,255,255,.16);border-radius:3px;overflow:hidden}
-.intro-bar i{display:block;height:100%;background:var(--red);transform-origin:left;transform:scaleX(0)}
+.has-intro .intro{display:grid;place-items:center;position:fixed;inset:0;z-index:200;animation:introSafe .01s linear 4.6s forwards;overflow:hidden}
+.intro-cols{position:absolute;inset:0;display:flex}
+.intro-cols i{flex:1;background:var(--navy-deep);margin-right:-1px}
+.intro-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(120,160,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(120,160,255,.10) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,#000,transparent 78%);mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,#000,transparent 78%);animation:gridMove 3s linear infinite}
+.intro-scan{position:absolute;left:0;right:0;top:0;height:34%;background:linear-gradient(180deg,transparent,rgba(209,10,32,.16) 70%,rgba(255,90,110,.75) 99%,transparent);animation:scan 1.5s cubic-bezier(.5,0,.5,1) infinite;mix-blend-mode:screen}
+.intro-hud{position:absolute;color:rgba(190,208,240,.75);font-size:.68rem;display:inline-flex;align-items:center;gap:8px}
+.intro-hud.tl{left:22px;top:20px}.intro-hud.tr{right:22px;top:20px}.intro-hud.bl{left:22px;bottom:20px}.intro-hud.br{right:22px;bottom:20px;font-size:1rem;color:#fff;font-variant-numeric:tabular-nums}
+.intro-hud.bl b{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink .7s steps(2) infinite}
+.intro-hud::before{content:"";position:absolute;width:14px;height:14px;border:1.5px solid rgba(190,208,240,.5)}
+.intro-hud.tl::before{left:-10px;top:-8px;border-right:0;border-bottom:0}
+.intro-hud.tr::before{right:-10px;top:-8px;border-left:0;border-bottom:0}
+.intro-hud.bl::before{left:-10px;bottom:-8px;border-right:0;border-top:0}
+.intro-hud.br::before{right:-10px;bottom:-8px;border-left:0;border-top:0}
+.intro-in{position:relative;display:grid;gap:26px;justify-items:center}
+.intro-mark{position:relative;width:min(260px,58vw);display:grid;place-items:center}
+.intro-mark svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 18px rgba(209,10,32,.75)) drop-shadow(0 0 46px rgba(209,10,32,.45))}
+.intro-mark path{fill:#D10920;stroke:#FF5A6E;stroke-width:5;stroke-linejoin:round}
+.intro-ring{position:absolute;width:150%;aspect-ratio:1;border-radius:50%;border:1px dashed rgba(150,180,255,.35);animation:spin 9s linear infinite}
+.intro-ring.r2{width:118%;border:1px solid rgba(150,180,255,.16);border-top-color:rgba(255,90,110,.9);animation:spin 1.6s linear infinite reverse}
+.intro-word{width:min(190px,44vw);height:auto}
+.intro-bar{width:min(240px,56vw);height:2px;background:rgba(255,255,255,.14);border-radius:3px;overflow:hidden}
+.intro-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),#FF8A96);transform-origin:left;transform:scaleX(0);box-shadow:0 0 12px rgba(255,90,110,.9)}
+@keyframes scan{0%{transform:translateY(-110%)}100%{transform:translateY(310%)}}
+@keyframes gridMove{to{background-position:0 44px,44px 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{50%{opacity:.2}}
 
 .progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--red);transform-origin:left;transform:scaleX(0);z-index:60;pointer-events:none}
 
@@ -408,14 +430,30 @@ section{scroll-margin-top:84px}
 </style>
 </head>
 <body>
-<div class="intro" id="intro" aria-hidden="true"><div class="intro-in"><img src="img/logo.png" alt="" width="591" height="192"><span class="intro-bar"><i></i></span></div></div>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-cols"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="intro-grid"></div>
+  <div class="intro-scan"></div>
+  <span class="intro-hud tl mono">Vallor Automação</span>
+  <span class="intro-hud tr mono">Food service · desde 1996</span>
+  <span class="intro-hud bl mono"><b></b>Iniciando sistema</span>
+  <span class="intro-hud br mono"><span id="intro-pct">000</span>%</span>
+  <div class="intro-in">
+    <div class="intro-mark">
+      <span class="intro-ring"></span><span class="intro-ring r2"></span>
+      <svg viewBox="0 0 833 375" width="833" height="375"><path id="intro-path" fill-rule="evenodd" d="M266.50 368.13C258.85 365.93 249.78 361.07 243.89 356.03C239.62 352.38 234.38 345.03 202.48 298.00C197.44 290.58 188.89 277.98 183.48 270.00C178.07 262.02 168.48 247.85 162.16 238.50C150.82 221.70 138.42 203.42 124.51 183.00C120.57 177.23 111.56 163.95 104.49 153.50C97.41 143.05 84.13 123.48 74.98 110.00C65.83 96.52 53.01 77.62 46.49 68.00C39.98 58.38 28.51 41.50 21.01 30.50C13.51 19.50 7.03 9.93 6.61 9.22C6.00 8.19 23.17 8.00 96.23 8.22L186.61 8.50L194.26 12.28C208.56 19.35 210.01 21.14 243.87 73.24C248.07 79.69 255.38 90.94 260.12 98.24C304.69 166.82 312.37 177.00 327.00 186.97C341.37 196.76 350.33 199.50 368.00 199.50C389.12 199.50 396.82 197.07 434.50 178.53C471.05 160.54 480.00 156.25 480.00 156.76C480.00 157.02 476.93 160.67 473.17 164.87C453.58 186.78 435.00 210.41 390.00 270.66C374.32 291.65 354.37 318.54 345.66 330.41C336.95 342.29 327.50 354.05 324.66 356.56C318.67 361.84 307.80 367.33 300.20 368.90C292.07 370.59 273.56 370.16 266.50 368.13ZM690.00 367.61C673.98 363.12 666.98 356.04 647.47 324.50C639.30 311.30 628.81 294.42 624.16 287.00C619.51 279.58 613.86 270.41 611.60 266.64L607.50 259.79L592.00 260.41C583.48 260.75 568.62 261.48 559.00 262.02C511.23 264.74 431.98 268.32 431.46 267.79C430.78 267.12 458.18 230.33 461.74 227.12C463.81 225.26 467.98 222.56 471.00 221.12C476.50 218.50 476.50 218.50 529.34 218.22C570.33 218.00 582.08 217.66 581.72 216.72C580.51 213.56 549.21 162.63 544.25 155.73C536.79 145.38 530.39 139.56 522.22 135.68C510.23 130.00 494.09 131.41 471.50 140.11C461.03 144.15 436.03 156.15 425.11 162.40C421.59 164.41 418.59 165.92 418.43 165.76C418.27 165.60 427.24 150.85 438.37 132.99C449.50 115.12 463.48 92.62 469.45 83.00C502.75 29.26 504.26 26.99 510.45 21.21C524.53 8.09 543.62 3.18 563.30 7.63C579.83 11.36 589.41 19.25 604.50 41.60C610.00 49.74 622.33 67.90 631.90 81.95C682.75 156.61 715.58 204.75 722.32 214.54C726.48 220.57 732.92 230.00 736.65 235.50C740.37 241.00 747.75 251.80 753.05 259.50C758.34 267.20 772.72 288.12 785.01 306.00C797.29 323.88 811.24 344.12 816.02 351.00C820.79 357.88 825.49 364.74 826.46 366.25C828.23 369.00 828.23 369.00 761.37 368.93C710.85 368.88 693.40 368.56 690.00 367.61Z"/></svg>
+    </div>
+    <img class="intro-word" src="img/logo.svg" alt="" width="591" height="192">
+    <span class="intro-bar"><i></i></span>
+  </div>
+</div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <a class="fab" id="fab" href="https://api.whatsapp.com/send?phone=5531992162569" target="_blank" rel="noopener" aria-label="WhatsApp Comercial, (31) 99216-2569"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></a>
 
 <header class="top" id="topo">
   <div class="wrap top-in">
-    <a class="brand" href="#topo" aria-label="Vallor Automação, início"><img src="img/logo.png" alt="Vallor Automação" width="591" height="192"></a>
+    <a class="brand" href="#topo" aria-label="Vallor Automação, início"><img src="img/logo.svg" alt="Vallor Automação" width="591" height="192"></a>
     <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -745,11 +783,11 @@ section{scroll-margin-top:84px}
 </main>
 
 <footer class="foot" id="foot">
-  <div class="foot-mark" id="foot-mark" aria-hidden="true"><img src="img/logo.png" alt="" width="591" height="192"></div>
+  <div class="foot-mark" id="foot-mark" aria-hidden="true"><img src="img/logo.svg" alt="" width="591" height="192"></div>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="brand" href="#topo" aria-label="Vallor Automação, voltar ao início"><img src="img/logo.png" alt="Vallor Automação" width="591" height="192"></a>
+        <a class="brand" href="#topo" aria-label="Vallor Automação, voltar ao início"><img src="img/logo.svg" alt="Vallor Automação" width="591" height="192"></a>
         <p class="foot-tag">Especialistas em tecnologia para o food service</p>
       </div>
       <div>
@@ -851,11 +889,19 @@ section{scroll-margin-top:84px}
   /* abertura */
   var t0 = 0;
   if (intro) {
-    t0 = 1.2; tStart = 1.35;
-    M.animate('.intro img', {opacity:[0,1], scale:[0.86,1]}, {duration:.6, ease:ease});
-    M.animate('.intro-bar i', {scaleX:[0,1]}, {duration:.85, ease:'easeInOut'});
-    M.animate(intro, {y:['0%','-100%']}, {delay:.98, duration:.75, ease:easeIO});
-    setTimeout(killIntro, 1850);
+    t0 = 2.2; tStart = 2.35;
+    var ip = document.getElementById('intro-path'), len = ip.getTotalLength(), pct = document.getElementById('intro-pct');
+    ip.style.strokeDasharray = len; ip.style.strokeDashoffset = len; ip.style.fillOpacity = 0;
+    ip.animate([{strokeDashoffset:len}, {strokeDashoffset:0}], {duration:1150, easing:'ease-in-out', fill:'forwards'});
+    ip.animate([{fillOpacity:0}, {fillOpacity:1}], {delay:850, duration:500, easing:'ease-out', fill:'forwards'});
+    M.animate('.intro-mark', {scale:[0.8,1], opacity:[0,1]}, {duration:.7, ease:ease});
+    M.animate('.intro-word', {opacity:[0,1], y:[14,0]}, {delay:.75, duration:.55, ease:ease});
+    M.animate('.intro-bar i', {scaleX:[0,1]}, {duration:1.6, ease:[0.6,0,0.2,1]});
+    M.animate(0, 100, {duration:1.6, ease:[0.6,0,0.2,1], onUpdate:function(v){ var n = Math.round(v); pct.textContent = (n < 10 ? '00' : n < 100 ? '0' : '') + n; }});
+    M.animate('.intro-in, .intro-hud, .intro-grid, .intro-scan', {opacity:0}, {delay:1.72, duration:.25});
+    M.animate('.intro-mark', {scale:1.25}, {delay:1.72, duration:.3, ease:'easeIn'});
+    M.animate('.intro-cols i', {y:['0%','-101%']}, {delay:M.stagger(.06, {startDelay:1.9}), duration:.6, ease:easeIO});
+    setTimeout(killIntro, 2950);
   }
 
   /* entrada do hero */
