@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vallor Automação</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Vallor Automação: software de PDV, consultoria e suporte 365 dias para restaurantes. Especialistas em food service desde 1996, em Belo Horizonte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("has-intro")}</script>
+<style>
+/* layout: um mundo só, azul-marinho da marca; faixas alternadas marinho/papel;
+   a ousadia fica no carimbo vermelho e na comanda de plantão, o resto é quieto */
+:root{
+  color-scheme:dark;
+  --navy:#071E42;          /* fundo da marca: os logos foram feitos sobre ele */
+  --navy-deep:#04142C;
+  --navy-soft:#0F2B5A;
+  --red:#D10A20;
+  --red-deep:#BE0318;
+  --paper:#F1F3F8;
+  --card:#FFFFFF;
+  --ink:#0A1A36;
+  --ink-soft:#4B5873;
+  --on-navy:#FFFFFF;
+  --on-navy-soft:#B6C2D9;
+  --line:rgba(255,255,255,.14);
+  --line-ink:rgba(10,26,54,.12);
+  --ticket:#FBF9F3;
+  --ok:#3DDC84;
+  --font-display:"Poppins","Segoe UI",system-ui,sans-serif;
+  --font-body:"Hanken Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --wrap:1180px;
+  --gutter:clamp(18px,4vw,40px);
+  --radius:20px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--navy);color:var(--on-navy);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);line-height:1.04;margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:6px}
+.paper :focus-visible{outline-color:var(--red)}
+.wrap{width:100%;max-width:calc(var(--wrap) + var(--gutter)*2);margin-inline:auto;padding-inline:var(--gutter)}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:var(--ink);padding:10px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+.mono{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase}
+section{scroll-margin-top:84px}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:999px;font-weight:700;font-size:1rem;line-height:1.2;text-decoration:none;text-align:center;border:1.5px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background-color .2s,border-color .2s,box-shadow .25s}
+.btn svg{flex:none;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px -12px rgba(209,10,32,.9)}
+.btn-red:hover{background:var(--red-deep);transform:translateY(-2px)}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--navy-soft);transform:translateY(-2px)}
+.btn-white{background:#fff;color:var(--red-deep)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(0,0,0,.6)}
+
+/* topo */
+.top{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.top.is-scrolled{border-color:var(--line);box-shadow:0 12px 30px -20px rgba(0,0,0,.8)}
+.top-in{display:flex;align-items:center;gap:22px;min-height:72px}
+.brand{display:flex;align-items:center;flex:none}
+.brand img{height:36px;width:auto}
+.nav{display:flex;align-items:center;gap:26px;margin-left:auto}
+.nav a{text-decoration:none;font-weight:600;font-size:.96rem;color:var(--on-navy-soft);padding:8px 0;position:relative;transition:color .2s}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav a:hover{color:#fff}
+.nav a:hover::after{transform:scaleX(1)}
+.top-partners{height:38px;width:auto;flex:none}
+.top .btn{min-height:44px;padding:10px 20px;font-size:.92rem}
+.menu-btn{display:none;margin-left:auto;width:46px;height:46px;border-radius:12px;border:1.5px solid var(--line);background:none;color:#fff;align-items:center;justify-content:center;cursor:pointer}
+@media (max-width:1040px){.top-partners{display:none}}
+@media (max-width:860px){
+  .menu-btn{display:inline-flex}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;margin:0;flex-direction:column;align-items:stretch;gap:0;background:var(--navy);border-bottom:1px solid var(--line);padding:6px var(--gutter) 18px}
+  .nav.is-open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1.05rem;color:#fff}
+  .nav a::after{display:none}
+  .top .btn-cta{display:none}
+  .nav .btn{display:inline-flex;margin-top:16px;border-bottom:0;padding:14px 20px}
+}
+@media (min-width:861px){.nav .btn{display:none}}
+
+/* hero */
+.hero{position:relative;padding:clamp(36px,6vw,76px) 0 clamp(90px,10vw,130px);background:
+  radial-gradient(900px 520px at 88% 8%,rgba(209,10,32,.20),transparent 62%),
+  radial-gradient(700px 500px at 0% 100%,rgba(15,43,90,.9),transparent 70%),var(--navy)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(28px,5vw,72px);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--on-navy-soft);margin-bottom:22px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--red)}
+.hero h1{font-size:clamp(2.6rem,6.3vw,5.1rem);font-weight:800}
+.stamp{display:inline-block;background:var(--red);color:#fff;padding:.02em .22em .08em;border-radius:.16em;transform:rotate(-2deg);box-shadow:0 18px 40px -18px rgba(209,10,32,.95);margin-top:.12em}
+.lede{font-size:clamp(1.06rem,1.5vw,1.24rem);color:var(--on-navy-soft);max-width:34em;margin-top:26px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:28px;color:var(--on-navy-soft);font-size:.95rem}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--on-navy-soft);flex:none}
+.is-open .dot{background:var(--ok);box-shadow:0 0 0 0 rgba(61,220,132,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+.hero-visual{position:relative}
+.hero-photo{border-radius:28px;overflow:hidden;aspect-ratio:4/4.6;background:var(--navy-soft);box-shadow:0 40px 80px -40px rgba(0,0,0,.9);border:1px solid var(--line)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:38% 30%;transform:scale(1.12)}
+.seal{position:absolute;top:-34px;right:-18px;width:clamp(104px,12vw,148px);filter:drop-shadow(0 16px 24px rgba(0,0,0,.55))}
+.ticket{position:absolute;left:-34px;bottom:-40px;width:min(310px,82%);background:var(--ticket);color:var(--ink);font-family:var(--font-mono);font-size:.8rem;line-height:1.5;padding:18px 18px 26px;transform:rotate(-2.2deg);box-shadow:0 30px 50px -24px rgba(0,0,0,.8);
+  -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 9px) no-repeat,radial-gradient(circle at 9px 0,#000 8.5px,transparent 9px) bottom left/18px 9px repeat-x;
+  mask:linear-gradient(#000,#000) top/100% calc(100% - 9px) no-repeat,radial-gradient(circle at 9px 0,#000 8.5px,transparent 9px) bottom left/18px 9px repeat-x}
+.ticket strong{display:block;font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:var(--red-deep)}
+.ticket hr{border:0;border-top:1.5px dashed rgba(10,26,54,.35);margin:10px 0}
+.ticket dl{margin:0;display:grid;gap:4px}
+.ticket dl div{display:flex;justify-content:space-between;gap:12px}
+.ticket dt{color:var(--ink-soft)}
+.ticket dd{margin:0;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ticket .status{margin-top:0;color:var(--ink);font-size:.8rem}
+.ticket .dot{background:var(--ink-soft)}
+@media (max-width:900px){
+  .ticket{font-size:.74rem;width:min(270px,78%)}
+  .hero-in{grid-template-columns:1fr}
+  .hero-photo{aspect-ratio:4/3.3}
+  .ticket{left:-6px;bottom:-46px}
+  .seal{right:-6px;top:-30px}
+  .hero{padding-bottom:96px}
+}
+
+/* pilares */
+.pillars{margin-top:-58px;position:relative;z-index:2;padding-bottom:clamp(40px,6vw,72px)}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pillar{position:relative;background:linear-gradient(160deg,#12305F,#0A2449);border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px 26px;display:flex;flex-direction:column;gap:12px;transition:transform .35s var(--ease),border-color .3s,box-shadow .35s;overflow:hidden}
+.pillar::after{content:"";position:absolute;left:22px;right:22px;top:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.pillar:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3);box-shadow:0 30px 50px -30px rgba(0,0,0,.9)}
+.pillar:hover::after{transform:scaleX(1)}
+.pillar-head{display:flex;align-items:center;justify-content:space-between}
+.icon{width:48px;height:48px;border-radius:14px;background:var(--red);display:grid;place-items:center;color:#fff}
+.pillar .mono{color:var(--on-navy-soft)}
+.pillar h3{font-size:1.32rem;font-weight:700}
+.pillar p{color:var(--on-navy-soft);font-size:.98rem}
+@media (max-width:980px){.pillars-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pillars-grid{grid-template-columns:1fr}.pillars{margin-top:-30px}}
+
+/* parceiros */
+.trust{padding:8px 0 clamp(48px,7vw,84px)}
+.trust-in{display:flex;flex-direction:column;gap:22px;align-items:center;border-top:1px solid var(--line);padding-top:34px}
+.trust .mono{color:var(--on-navy-soft)}
+.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px clamp(22px,4vw,54px)}
+.logos img{height:46px;width:auto}
+@media (max-width:520px){.logos img{height:38px}}
+
+/* faixas claras */
+.paper{background:var(--paper);color:var(--ink);color-scheme:light}
+.band{padding:clamp(64px,9vw,120px) 0}
+.kicker{color:var(--red-deep);display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+.kicker::before{content:"";width:28px;height:2px;background:var(--red)}
+.navy-band .kicker{color:#FF8A96}
+.h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:800}
+.sub{color:var(--ink-soft);max-width:38em;margin-top:16px}
+
+/* quem somos */
+.about{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(30px,6vw,84px);align-items:center}
+.about-text{display:grid;gap:18px;margin-top:26px;max-width:36em}
+.about-text p:first-child{font-size:1.22rem;line-height:1.5;color:var(--ink);font-weight:500}
+.about-text p{color:var(--ink-soft)}
+.about-photo{position:relative;margin:0 0 24px 24px}
+.about-red{position:absolute;inset:24px 24px -24px -24px;background:var(--red);border-radius:28px}
+.about-photo img{position:relative;border-radius:28px;width:100%;aspect-ratio:497/603;object-fit:cover;box-shadow:0 30px 60px -34px rgba(10,26,54,.7)}
+.mvv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(44px,6vw,72px)}
+.mvv article{background:var(--card);border:1px solid var(--line-ink);border-radius:var(--radius);padding:26px 24px;display:flex;flex-direction:column;gap:12px}
+.mvv h3{font-size:1.4rem;font-weight:700}
+.mvv p{color:var(--ink-soft)}
+.mvv .mono{color:var(--red-deep)}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{border:1.5px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.92rem;transition:background-color .2s,color .2s}
+.chips li:hover{background:var(--ink);color:#fff}
+@media (max-width:900px){.about{grid-template-columns:1fr}.about-photo{max-width:440px}.mvv{grid-template-columns:1fr}}
+
+/* jornada */
+.navy-band{background:var(--navy-deep)}
+.navy-band .sub{color:var(--on-navy-soft)}
+.timeline{position:relative;margin-top:clamp(36px,5vw,64px);display:grid;gap:0}
+.tl-line,.tl-progress{position:absolute;left:calc(clamp(96px,17vw,230px) + 28px);top:10px;bottom:10px;width:3px;border-radius:3px}
+.tl-line{background:var(--line)}
+.tl-progress{background:var(--red);transform-origin:top}
+.tl-item{display:grid;grid-template-columns:clamp(96px,17vw,230px) 58px minmax(0,1fr);align-items:start;padding:clamp(18px,2.6vw,30px) 0}
+.tl-year{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,6vw,4.6rem);line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:#fff}
+.tl-node{justify-self:center;width:22px;height:22px;border-radius:50%;background:var(--navy-deep);border:4px solid #fff;margin-top:clamp(6px,1.4vw,22px);position:relative;z-index:1}
+.tl-body{padding-left:clamp(6px,2vw,26px);max-width:34em}
+.tl-body h3{font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:700;color:#FF8A96}
+.tl-body p{color:var(--on-navy-soft);margin-top:8px}
+.tl-body b{color:#fff;font-weight:600}
+
+/* soluções */
+.sol-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:clamp(34px,5vw,56px)}
+.sol{background:var(--card);border:1px solid var(--line-ink);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .35s var(--ease),box-shadow .35s,border-color .3s}
+.sol:hover{transform:translateY(-6px);box-shadow:0 34px 50px -34px rgba(10,26,54,.55);border-color:rgba(10,26,54,.3)}
+.sol-img{aspect-ratio:16/10;overflow:hidden;background:var(--navy)}
+.sol-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.sol:hover .sol-img img{transform:scale(1.06)}
+.sol-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.sol .mono{color:var(--red-deep)}
+.sol h3{font-size:1.45rem;font-weight:700}
+.sol p{color:var(--ink-soft);font-size:.98rem}
+.sol-more{margin-top:auto;padding-top:10px;display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink)}
+.sol-more svg{transition:transform .25s var(--ease)}
+.sol:hover .sol-more svg{transform:translateX(5px)}
+@media (max-width:980px){.sol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.sol-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:calc(var(--gutter)*-1);padding:4px var(--gutter) 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.sol-grid::-webkit-scrollbar{display:none}.sol{flex:0 0 84%;scroll-snap-align:center}}
+
+/* prova */
+.proof{background:var(--navy)}
+.proof-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,64px);align-items:end}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.stat{border-top:3px solid var(--red);padding-top:16px}
+.stat-n{font-family:var(--font-display);font-weight:800;font-size:clamp(2.8rem,6.4vw,5rem);line-height:.95;letter-spacing:-.04em;font-variant-numeric:tabular-nums;display:block}
+.stat-n small{font-size:.55em;color:#FF8A96;margin-left:.04em}
+.stat-l{color:var(--on-navy-soft);margin-top:8px;display:block}
+.deps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:clamp(34px,5vw,60px)}
+.dep{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--navy-soft);border:1px solid var(--line);text-decoration:none;color:#fff;display:block;aspect-ratio:3/3.6;transition:transform .35s var(--ease),border-color .3s}
+.dep:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.4)}
+.dep img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.dep:hover img{transform:scale(1.06)}
+.dep::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,20,44,0) 35%,rgba(4,20,44,.94) 100%)}
+.dep-play{position:absolute;top:14px;left:14px;z-index:1;width:46px;height:46px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.7);transition:transform .3s var(--ease)}
+.dep:hover .dep-play{transform:scale(1.12)}
+.dep-cap{position:absolute;left:16px;right:16px;bottom:14px;z-index:1;display:grid;gap:2px}
+.dep-cap b{font-family:var(--font-display);font-size:1.22rem;line-height:1.15}
+.dep-cap span{color:var(--on-navy-soft);font-size:.92rem}
+.dep-cap .mono{color:#fff;opacity:.85;margin-top:6px;font-size:.68rem}
+.proof-cta{display:flex;justify-content:center;margin-top:clamp(34px,5vw,56px)}
+@media (max-width:980px){.proof-head{grid-template-columns:1fr;align-items:start}.deps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* dores */
+.pains{display:grid;margin-top:clamp(30px,4vw,48px);border-top:1.5px solid var(--ink)}
+.pain{display:grid;grid-template-columns:minmax(0,.5fr) minmax(0,1.25fr) minmax(0,1fr);gap:clamp(18px,3.4vw,48px);padding:clamp(30px,4.4vw,56px) 0;border-bottom:1.5px solid var(--ink);align-items:start}
+.pain .mono{color:var(--red-deep);display:grid;gap:6px}
+.pain .mono b{font-family:var(--font-display);font-weight:800;font-size:2.4rem;letter-spacing:-.04em;color:var(--ink);line-height:1}
+.pain h3{font-size:clamp(1.55rem,2.9vw,2.4rem);font-weight:700}
+.pain-body{display:grid;gap:22px;justify-items:start}
+.pain-body p{color:var(--ink-soft)}
+@media (max-width:900px){.pain{grid-template-columns:1fr;gap:16px}.pain .mono{display:flex;align-items:baseline;gap:12px}}
+
+/* contato */
+.contact{background:var(--red-deep);color:#fff;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 420px at 100% 0,rgba(255,255,255,.14),transparent 65%),radial-gradient(600px 400px at 0 100%,rgba(4,20,44,.5),transparent 70%)}
+.contact .wrap{position:relative}
+.contact .kicker{color:#fff}
+.contact .kicker::before{background:#fff}
+.contact .h2{font-size:clamp(2.4rem,6vw,4.6rem)}
+.contact .sub{color:rgba(255,255,255,.9)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(30px,4.4vw,52px)}
+.cc{background:#fff;color:var(--ink);border-radius:var(--radius);padding:24px;text-decoration:none;display:flex;flex-direction:column;gap:14px;transition:transform .35s var(--ease),box-shadow .35s}
+.cc:hover{transform:translateY(-6px);box-shadow:0 34px 44px -30px rgba(0,0,0,.7)}
+.cc .icon{background:var(--navy)}
+.cc small{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
+.cc b{font-family:var(--font-display);font-size:clamp(1.35rem,2.2vw,1.7rem);line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.cc-go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--red-deep)}
+.cc-go svg{transition:transform .25s var(--ease)}
+.cc:hover .cc-go svg{transform:translateX(5px)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+
+/* rodapé */
+.foot{background:var(--navy);padding:clamp(48px,7vw,80px) 0 34px}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(26px,5vw,60px)}
+.foot .brand img{height:52px}
+.foot-tag{color:var(--on-navy-soft);margin-top:16px;max-width:20em}
+.foot h3{font-family:var(--font-mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:500;color:var(--on-navy-soft);margin-bottom:14px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.foot li{display:flex;gap:10px;align-items:flex-start}
+.foot li svg{flex:none;margin-top:4px;color:#FF8A96}
+.foot a{text-decoration:none;border-bottom:1px solid var(--line)}
+.foot a:hover{border-color:#fff}
+.foot-end{border-top:1px solid var(--line);margin-top:clamp(34px,5vw,54px);padding-top:22px;color:var(--on-navy-soft);font-size:.9rem;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr}}
+
+/* ===== camada de efeitos ===== */
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes drift{to{transform:translate3d(5%,-4%,0) scale(1.18)}}
+@keyframes introSafe{to{visibility:hidden}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+
+.intro{display:none}
+.has-intro .intro{display:grid;place-items:center;position:fixed;inset:0;z-index:200;background:var(--navy-deep);animation:introSafe .01s linear 3.4s forwards}
+.intro-in{display:grid;gap:22px;justify-items:center}
+.intro img{width:min(240px,56vw)}
+.intro-bar{width:min(240px,56vw);height:3px;background:rgba(255,255,255,.16);border-radius:3px;overflow:hidden}
+.intro-bar i{display:block;height:100%;background:var(--red);transform-origin:left;transform:scaleX(0)}
+
+.progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--red);transform-origin:left;transform:scaleX(0);z-index:60;pointer-events:none}
+
+.fab{position:fixed;right:18px;bottom:18px;z-index:55;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.6);animation:ring 2.6s infinite;transition:opacity .35s,transform .45s var(--ease)}
+.fab:hover{transform:scale(1.08)}
+.js-motion .fab{opacity:0;transform:scale(.5);pointer-events:none}
+.js-motion .fab.is-in{opacity:1;transform:none;pointer-events:auto}
+.js-motion .fab.is-in:hover{transform:scale(1.08)}
+
+/* hero vivo */
+.hero{overflow:hidden;isolation:isolate}
+.aurora{position:absolute;left:-10%;top:-10%;width:120%;height:120%;z-index:-3;filter:blur(48px) saturate(1.3);opacity:.95}
+.hero-grid{position:absolute;inset:0;z-index:-2;background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.5px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse 75% 75% at 28% 42%,#000,transparent 78%);mask-image:radial-gradient(ellipse 75% 75% at 28% 42%,#000,transparent 78%)}
+.hero-spot{position:absolute;inset:0;z-index:-1;background:radial-gradient(480px circle at var(--mx,72%) var(--my,28%),rgba(255,255,255,.10),transparent 62%);pointer-events:none}
+.hv{position:relative;transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .35s ease-out;transform-style:preserve-3d}
+.seal-wrap{position:absolute;top:-34px;right:-18px;width:clamp(104px,12vw,148px);animation:floaty 6s ease-in-out infinite;z-index:2}
+.seal{position:static;width:100%}
+.ticket-wrap{position:absolute;left:-34px;bottom:-40px;width:min(310px,82%);animation:floaty 7.5s ease-in-out -2s infinite;filter:drop-shadow(0 26px 28px rgba(0,0,0,.5));z-index:2}
+.ticket{position:static;width:100%;box-shadow:none}
+@media (max-width:900px){.ticket-wrap{left:-6px;bottom:-46px;width:min(270px,78%)}.seal-wrap{right:-6px;top:-30px}}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .05em .18em;margin:-.16em -.05em -.18em}
+.wi{display:inline-block;will-change:transform}
+
+/* hero: colagem com os produtos reais */
+.collage{position:relative;aspect-ratio:1/1.02}
+.shot{position:absolute;margin:0;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.22);box-shadow:0 34px 60px -28px rgba(0,0,0,.85);background:var(--navy-soft)}
+.shot img{width:100%;height:100%;object-fit:cover}
+.shot-a{right:0;top:0;width:86%;aspect-ratio:16/10;rotate:2deg;animation:floaty 7s ease-in-out infinite}
+.shot-b{left:0;top:41%;width:57%;aspect-ratio:4/3;rotate:-4deg;z-index:2;animation:floaty 8s ease-in-out -3s infinite}
+.shot-c{right:3%;top:58%;width:50%;aspect-ratio:4/3;rotate:3deg;z-index:3;animation:floaty 6.5s ease-in-out -1.5s infinite}
+.seal-wrap{top:1%;right:auto;left:-5%;bottom:auto;width:clamp(86px,22%,122px);z-index:4}
+.seal{height:auto}
+@media (max-width:900px){.seal-wrap{top:0;right:auto;left:-1%;bottom:auto}.collage{max-width:520px;margin-inline:auto}}
+
+/* inclinação 3D + brilho que segue o mouse */
+.pillar,.sol,.dep,.cc{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--lift,0px))}
+.pillar:hover,.sol:hover,.dep:hover,.cc:hover{--lift:-6px;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--lift,0px))}
+.sol,.cc{position:relative}
+.pillar::before,.sol::before,.cc::before,.dep::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(280px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.16),transparent 62%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:2}
+.sol::before,.cc::before{background:radial-gradient(300px circle at var(--gx,50%) var(--gy,50%),rgba(209,10,32,.12),transparent 62%)}
+.pillar:hover::before,.sol:hover::before,.cc:hover::before,.dep:hover::before{opacity:1}
+
+/* faixa de logos correndo */
+.logo-marquee{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logo-track{display:flex;align-items:center;gap:clamp(34px,5vw,64px);padding-right:clamp(34px,5vw,64px);width:max-content;animation:marquee 38s linear infinite}
+.logo-track img{height:46px;width:auto;flex:none}
+.logo-marquee:hover .logo-track{animation-play-state:paused}
+@media (max-width:520px){.logo-track img{height:38px}}
+
+/* faixa vermelha */
+.ribbon-wrap{background:linear-gradient(var(--navy) 0 50%,var(--paper) 50% 100%);overflow:hidden;padding:22px 0}
+.ribbon{background:var(--red);transform:rotate(-1.8deg) scale(1.06);padding:clamp(11px,1.6vw,18px) 0;box-shadow:0 22px 40px -22px rgba(4,20,44,.7)}
+.ribbon-track{display:flex;width:max-content;animation:marquee 30s linear infinite;font-family:var(--font-display);font-weight:800;font-size:clamp(1.35rem,3.6vw,2.8rem);text-transform:uppercase;white-space:nowrap;line-height:1;color:#fff}
+.ribbon-track span{display:inline-flex;align-items:center;gap:.7em;padding-right:.7em}
+.ribbon-track span::after{content:"";width:.42em;height:.42em;background:#fff;transform:rotate(45deg);flex:none}
+.ribbon-track span:nth-child(even){color:transparent;-webkit-text-stroke:1.5px #fff}
+
+/* quem somos */
+.about-frame{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -34px rgba(10,26,54,.7)}
+.about-frame img{border-radius:0;box-shadow:none;transform:scale(1.14)}
+.sw{transition:none}
+
+/* linha do tempo acende */
+.tl-node{transition:background-color .4s,box-shadow .5s}
+.js-motion .tl-item{opacity:.26;transform:translateX(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js-motion .tl-item.is-on{opacity:1;transform:none}
+.js-motion .tl-item.is-on .tl-node{background:var(--red);box-shadow:0 0 0 8px rgba(209,10,32,.28)}
+
+/* soluções: rolagem horizontal presa */
+.sol-headrow{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.sol-meter{display:none;align-items:center;gap:12px;color:var(--ink);font-size:.86rem;padding-bottom:10px}
+.sol-meter i{display:block;width:140px;height:3px;background:var(--line-ink);border-radius:3px;overflow:hidden}
+.sol-meter b{display:block;height:100%;background:var(--red);transform-origin:left;transform:scaleX(0)}
+.sol-hint{display:none;color:var(--ink-soft);margin-top:6px}
+@media (max-width:600px){.sol-hint{display:block}}
+.is-pinned.band{padding:0}
+.is-pinned .sol-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:clip;display:flex;flex-direction:column;justify-content:center;padding-top:72px}
+.is-pinned .h2{font-size:clamp(1.8rem,3.3vw,2.7rem)}
+.is-pinned .sol-grid{display:flex;flex-wrap:nowrap;width:max-content;gap:22px;margin-top:28px;will-change:transform}
+.is-pinned .sol{flex:0 0 clamp(320px,27vw,390px)}
+.is-pinned .sol-meter{display:flex}
+
+/* dores: cartões empilhando */
+.pains{border-top:0;gap:22px;padding-bottom:4vh}
+.pain{position:sticky;top:calc(92px + var(--i,0)*20px);border-bottom:0;border-radius:28px;padding:clamp(26px,4.4vw,60px);min-height:min(400px,58vh);align-items:center;transform-origin:50% 0;box-shadow:0 -20px 50px -30px rgba(4,20,44,.6);will-change:transform}
+.pain:nth-child(1){background:var(--navy);color:#fff}
+.pain:nth-child(2){background:var(--red-deep);color:#fff}
+.pain:nth-child(3){background:#fff;color:var(--ink);border:1px solid var(--line-ink)}
+.pain:nth-child(-n+2) .mono{color:rgba(255,255,255,.82)}
+.pain:nth-child(-n+2) .mono b{color:#fff}
+.pain:nth-child(-n+2) .pain-body p{color:rgba(255,255,255,.88)}
+.pain:nth-child(-n+2) :focus-visible{outline-color:#fff}
+
+/* contato e rodapé */
+.contact::before{inset:-20%;animation:drift 14s ease-in-out infinite alternate}
+.foot{position:relative;overflow:hidden}
+.foot .wrap{position:relative}
+.foot-mark{position:absolute;left:50%;bottom:-4%;width:min(1180px,128%);translate:-50% 0;opacity:.06;pointer-events:none}
+.foot-mark img{width:100%}
+
+@media (prefers-reduced-motion:reduce){
+  .logo-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto;padding-right:0}
+  .logo-track .dup{display:none}
+  .logo-marquee{-webkit-mask-image:none;mask-image:none}
+  .aurora{display:none}
+  .about-frame img{transform:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero-photo img{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="intro" id="intro" aria-hidden="true"><div class="intro-in"><img src="img/logo.png" alt="" width="591" height="192"><span class="intro-bar"><i></i></span></div></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<a class="fab" id="fab" href="https://api.whatsapp.com/send?phone=5531992162569" target="_blank" rel="noopener" aria-label="WhatsApp Comercial, (31) 99216-2569"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></a>
+
+<header class="top" id="topo">
+  <div class="wrap top-in">
+    <a class="brand" href="#topo" aria-label="Vallor Automação, início"><img src="img/logo.png" alt="Vallor Automação" width="591" height="192"></a>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="menu" aria-label="Principal">
+      <a href="#quem-somos">Quem somos</a>
+      <a href="#solucoes">Soluções</a>
+      <a href="https://www.instagram.com/vallor_automacao/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-red" href="https://vallorsolucoes.com.br/lp/#formulario" target="_blank" rel="noopener">Faça a Cotação para seu Negócio</a>
+    </nav>
+    <img class="top-partners" src="img/parceiros-topo.png" alt="Colibri e RS Solutions" width="195" height="80">
+    <a class="btn btn-red btn-cta" href="https://vallorsolucoes.com.br/lp/#formulario" target="_blank" rel="noopener">Faça a Cotação para seu Negócio</a>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<section class="hero" id="hero">
+  <canvas class="aurora" id="aurora" width="160" height="110" aria-hidden="true"></canvas>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-spot" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyebrow mono" data-rise>Food service · desde 1996</p>
+      <h1 id="h1">A Gestão do seu restaurante, <span class="stamp">reinventada.</span></h1>
+      <p class="lede" data-rise>Mais que um sistema, uma parceria completa com software, consultoria e o suporte que seu negócio precisa para crescer.</p>
+      <div class="hero-actions" data-rise>
+        <a class="btn btn-red" data-magnetic href="https://vallorsolucoes.com.br/lp/#formulario" target="_blank" rel="noopener">Faça a Cotação para seu Negócio
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#solucoes">Conhecer soluções</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv" id="hv">
+      <div class="collage" id="collage">
+        <figure class="shot shot-a"><img src="img/pdv-colibri.webp" alt="Tela do PDV Colibri em uso no balcão de um restaurante" width="533" height="301"></figure>
+        <figure class="shot shot-b"><img src="img/menu-facil.webp" alt="Cardápio digital aberto no celular ao lado de um QR code" width="471" height="276"></figure>
+        <figure class="shot shot-c"><img src="img/vitrine-totem.webp" alt="Totem digital de autoatendimento" width="409" height="243"></figure>
+      </div>
+      <div class="seal-wrap"><img class="seal" src="img/selo-30-anos.png" alt="Selo 30 anos no mercado" width="286" height="241"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars" aria-label="Nossos pilares">
+  <div class="wrap pillars-grid" data-stagger>
+    <article class="pillar">
+      <div class="pillar-head"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 9h4M7 12h7"/></svg></span><span class="mono">01</span></div>
+      <h3>Sistema Colibri</h3>
+      <p>O software de PDV líder de mercado, com o nosso toque especializado e suporte dedicado.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-head"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-6M12 20V9M19 20V4"/></svg></span><span class="mono">02</span></div>
+      <h3>Consultoria Estratégica</h3>
+      <p>Nossos especialistas otimizando seu estoque, fichas técnicas e finanças para maximizar seu lucro.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-head"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span><span class="mono">03</span></div>
+      <h3>Suporte 365 dias</h3>
+      <p>Seu restaurante não para. Nosso suporte também não. Atendimento até meia-noite, todos os dias.</p>
+    </article>
+    <article class="pillar">
+      <div class="pillar-head"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span><span class="mono">04</span></div>
+      <h3>Equipamentos</h3>
+      <p>A estrutura completa para sua operação, sem dor de cabeça. PDVs, eficiência e automação.</p>
+    </article>
+  </div>
+</section>
+
+<section class="trust" aria-label="Parceiros e associações">
+  <div class="wrap">
+    <div class="trust-in" data-reveal>
+      <span class="mono">Parceiros e associações</span>
+      <div class="logo-marquee"><div class="logo-track">
+        <img src="img/parc-1.png" alt="Colibri" width="277" height="66">
+        <img src="img/assoc-1.png" alt="Abrasel" width="141" height="72">
+        <img src="img/parc-2.png" alt="RS Solutions" width="94" height="66">
+        <img src="img/assoc-2.png" alt="AFRAC" width="151" height="72">
+        <img src="img/parc-3.png" alt="Conexão Itaú" width="164" height="66">
+        <img src="img/assoc-3.png" alt="ABF, Associação Brasileira de Franchising" width="164" height="72">
+        <img class="dup" src="img/parc-1.png" alt="" aria-hidden="true" width="277" height="66">
+        <img class="dup" src="img/assoc-1.png" alt="" aria-hidden="true" width="141" height="72">
+        <img class="dup" src="img/parc-2.png" alt="" aria-hidden="true" width="94" height="66">
+        <img class="dup" src="img/assoc-2.png" alt="" aria-hidden="true" width="151" height="72">
+        <img class="dup" src="img/parc-3.png" alt="" aria-hidden="true" width="164" height="66">
+        <img class="dup" src="img/assoc-3.png" alt="" aria-hidden="true" width="164" height="72">
+        <img class="dup" src="img/parc-1.png" alt="" aria-hidden="true" width="277" height="66">
+        <img class="dup" src="img/assoc-1.png" alt="" aria-hidden="true" width="141" height="72">
+        <img class="dup" src="img/parc-2.png" alt="" aria-hidden="true" width="94" height="66">
+        <img class="dup" src="img/assoc-2.png" alt="" aria-hidden="true" width="151" height="72">
+        <img class="dup" src="img/parc-3.png" alt="" aria-hidden="true" width="164" height="66">
+        <img class="dup" src="img/assoc-3.png" alt="" aria-hidden="true" width="164" height="72">
+        <img class="dup" src="img/parc-1.png" alt="" aria-hidden="true" width="277" height="66">
+        <img class="dup" src="img/assoc-1.png" alt="" aria-hidden="true" width="141" height="72">
+        <img class="dup" src="img/parc-2.png" alt="" aria-hidden="true" width="94" height="66">
+        <img class="dup" src="img/assoc-2.png" alt="" aria-hidden="true" width="151" height="72">
+        <img class="dup" src="img/parc-3.png" alt="" aria-hidden="true" width="164" height="66">
+        <img class="dup" src="img/assoc-3.png" alt="" aria-hidden="true" width="164" height="72">
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon-wrap" id="ribbon-wrap" aria-hidden="true"><div class="ribbon"><div id="ribbon-shift"><div class="ribbon-track"><span>Sistema Colibri</span><span>Consultoria Estratégica</span><span>Suporte 365 dias</span><span>Equipamentos</span><span>Sistema Colibri</span><span>Consultoria Estratégica</span><span>Suporte 365 dias</span><span>Equipamentos</span><span>Sistema Colibri</span><span>Consultoria Estratégica</span><span>Suporte 365 dias</span><span>Equipamentos</span><span>Sistema Colibri</span><span>Consultoria Estratégica</span><span>Suporte 365 dias</span><span>Equipamentos</span></div></div></div></div>
+
+<section class="paper band" id="quem-somos">
+  <div class="wrap">
+    <div class="about">
+      <div data-reveal>
+        <span class="kicker mono">Desde 1996</span>
+        <h2 class="h2">Quem somos</h2>
+        <div class="about-text">
+          <p id="about-lead">Vallor Automação nasceu em 1996 com um propósito claro: ir além da tecnologia. Somos especialistas no segmento de food service e ajudamos restaurantes a organizarem sua operação, venderem mais e terem controle real do negócio.</p>
+          <p>Mais do que implantar sistemas, somos parceiros do dia a dia. Estamos ao lado do cliente quando o movimento está alto, quando surgem problemas e quando decisões precisam ser tomadas com segurança. Ao longo de quase três décadas, construímos muito mais do que uma carteira de clientes: construímos confiança.</p>
+          <p>Nosso diferencial está no suporte próximo, na experiência prática e na capacidade de resolver de verdade. A Vallor Automação não é apenas uma empresa de tecnologia. É uma parceira para o crescimento do seu restaurante.</p>
+        </div>
+      </div>
+      <figure class="about-photo" data-reveal>
+        <span class="about-red" id="about-red" aria-hidden="true"></span>
+        <div class="about-frame"><img src="img/sala.webp" alt="Sala de reuniões da Vallor Automação, com o logo na parede" width="497" height="603"></div>
+      </figure>
+    </div>
+    <div class="mvv" data-stagger>
+      <article>
+        <h3>Missão</h3>
+        <p>Transformar a gestão de restaurantes com tecnologia, suporte próximo e soluções que funcionam na prática.</p>
+      </article>
+      <article>
+        <h3>Visão</h3>
+        <p>Ser referência em soluções e suporte para o food service, com crescimento sólido, inovação constante e proximidade com o cliente.</p>
+      </article>
+      <article>
+        <h3>Valores</h3>
+        <ul class="chips">
+          <li>Compromisso</li><li>Transparência</li><li>Agilidade</li><li>Evolução</li><li>Respeito</li><li>Excelência</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="navy-band band" id="jornada">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker mono">1996 – 2026</span>
+      <h2 class="h2">Nossa Jornada</h2>
+    </div>
+    <div class="timeline" id="timeline">
+      <span class="tl-line" aria-hidden="true"></span>
+      <span class="tl-progress" aria-hidden="true"></span>
+      <article class="tl-item">
+        <span class="tl-year">1996</span><span class="tl-node" aria-hidden="true"></span>
+        <div class="tl-body"><h3>O Início</h3><p>Começamos com um propósito: ajudar restaurantes a <b>crescer com tecnologia e organização.</b></p></div>
+      </article>
+      <article class="tl-item">
+        <span class="tl-year">2005</span><span class="tl-node" aria-hidden="true"></span>
+        <div class="tl-body"><h3>Crescimento</h3><p>Expandimos nossa atuação e nos tornamos <b>referência em automação para o food service</b> em Minas Gerais.</p></div>
+      </article>
+      <article class="tl-item">
+        <span class="tl-year">2015</span><span class="tl-node" aria-hidden="true"></span>
+        <div class="tl-body"><h3>Liderança</h3><p>Alcançamos <b>reconhecimento nacional</b> com prêmios de desempenho e excelência no mercado.</p></div>
+      </article>
+      <article class="tl-item">
+        <span class="tl-year">2025</span><span class="tl-node" aria-hidden="true"></span>
+        <div class="tl-body"><h3>Novo momento</h3><p><b>O sistema Colibri</b> entra em uma nova fase com a união a um dos principais grupos de tecnologia do país, ampliando possibilidades e fortalecendo o futuro.</p></div>
+      </article>
+      <article class="tl-item">
+        <span class="tl-year">2026</span><span class="tl-node" aria-hidden="true"></span>
+        <div class="tl-body"><h3>Crescimento contínuo</h3><p>Já são mais de <b>6.000 clientes</b> atendidos e seguimos em expansão, com foco em excelência, inovação e resultado para nossos clientes.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="paper band" id="solucoes">
+  <div class="sol-pin" id="sol-pin"><div class="sol-sticky">
+  <div class="wrap">
+    <div class="sol-headrow">
+      <div data-reveal>
+        <span class="kicker mono">Soluções</span>
+        <h2 class="h2">Por que a Vallor é a Escolha Certa?</h2>
+      </div>
+      <div class="sol-meter mono" aria-hidden="true"><span id="sol-idx">01</span><i><b id="sol-bar"></b></i><span>09</span></div>
+    </div>
+    <div class="sol-grid" id="sol-track">
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/pdv-colibri.webp" alt="Tela do PDV Colibri em uso no balcão" width="533" height="301"></div>
+        <div class="sol-body"><span class="mono">Sistema PDV Completo</span><h3>PDV Colibri</h3><p>Agilize o atendimento, registre pedidos, emita notas fiscais e tenha controle total da sua operação em um sistema de PDV moderno e confiável</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/pdv-facil.webp" alt="Atendente usando o PDV Fácil no caixa" width="410" height="243"></div>
+        <div class="sol-body"><span class="mono">Sistema PDV Completo</span><h3>PDV Fácil</h3><p>Facilidade e agilidade no atendimento com um sistema intuitivo, rápido e seguro</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/vitrine-totem.webp" alt="Totem digital de autoatendimento em uma loja" width="409" height="243"></div>
+        <div class="sol-body"><span class="mono">Totem digital</span><h3>Vitrine Totem</h3><p>Ofereça uma experiência única aos clientes com um totem digital interativo, permitindo a exibição de promoções, vídeos e conteúdos personalizados</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/tablet-facil.webp" alt="Tablet com o sistema de pedidos sobre a mesa" width="403" height="237"></div>
+        <div class="sol-body"><span class="mono">Sistema PDV Completo</span><h3>Tablet Fácil</h3><p>Agilize o atendimento, registre pedidos, emita notas fiscais e tenha controle total da sua operação em um sistema de PDV moderno e confiável</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/app-lojista.webp" alt="Painel de vendas do APP do Lojista em um notebook" width="473" height="281"></div>
+        <div class="sol-body"><span class="mono">Gestão na palma da mão</span><h3>APP do Lojista</h3><p>Gerencie pedidos, acompanhe vendas, estoque e relatórios de onde estiver. Mais autonomia e eficiência para o seu negócio a qualquer hora</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/paglee.webp" alt="Paglee conectando cartões, Pix e código de barras" width="472" height="288"></div>
+        <div class="sol-body"><span class="mono">Meios de pagamento</span><h3>Paglee</h3><p>Centralize e processe suas transações de forma ágil e segura. O Paglee conecta seu negócio às principais bandeiras e meios de pagamento, garantindo vendas sem falhas</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/hub-facil.webp" alt="Hub Fácil reunindo pedidos de vários aplicativos em um notebook" width="471" height="283"></div>
+        <div class="sol-body"><span class="mono">Centralização de pedidos</span><h3>Hub Fácil</h3><p>Os pedidos de diferentes canais caem diretamente no sistema PDV</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/menu-facil.webp" alt="Cardápio digital aberto no celular ao lado de um QR code" width="471" height="276"></div>
+        <div class="sol-body"><span class="mono">Cardápio digital</span><h3>Menu Fácil</h3><p>Gerencie o fluxo de pedidos, atualize seu cardápio e acompanhe o desempenho das vendas diretamente no painel</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <a class="sol" href="https://vallorsolucoes.com.br/lp/" target="_blank" rel="noopener">
+        <div class="sol-img"><img src="img/self-checkout.webp" alt="Clientes fazendo o pedido sozinhos no self checkout" width="463" height="281"></div>
+        <div class="sol-body"><span class="mono">Autoatendimento</span><h3>Self Checkout</h3><p>Experiência mais fluida e sem espera, permitindo que eles realizem o pedido e o pagamento sozinhos de forma rápida e intuitiva</p><span class="sol-more">Faça a cotação <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+    </div>
+    <p class="sol-hint mono" aria-hidden="true">Arraste para o lado</p>
+  </div>
+  </div></div>
+</section>
+
+<section class="proof band" id="clientes">
+  <div class="wrap">
+    <div class="proof-head">
+      <div data-reveal>
+        <span class="kicker mono" style="color:#FF8A96">Clientes</span>
+        <h2 class="h2">A Confiança de Centenas de Restaurantes em Minas Gerais</h2>
+      </div>
+      <div class="stats" data-reveal>
+        <div class="stat"><span class="stat-n"><span data-count="6000">6.000</span><small>+</small></span><span class="stat-l">Clientes Atendidos</span></div>
+        <div class="stat"><span class="stat-n"><span data-count="98">98</span><small>%</small></span><span class="stat-l">Satisfação dos Clientes</span></div>
+      </div>
+    </div>
+    <div class="deps" data-stagger>
+      <a class="dep" href="https://vallorsolucoes.com.br/wp-content/uploads/2026/03/Maria-das-Trancas-Novo.mp4" target="_blank" rel="noopener">
+        <img src="img/dep-ricardo.webp" alt="Ricardo, do Restaurante Maria das Tranças" width="416" height="314">
+        <span class="dep-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="dep-cap"><b>Ricardo</b><span>Restaurante Maria das Tranças</span><span class="mono">Assistir depoimento</span></span>
+      </a>
+      <a class="dep" href="https://vallorsolucoes.com.br/wp-content/uploads/2026/03/Dona-Fulo-novo.mp4" target="_blank" rel="noopener">
+        <img src="img/dep-cleide.webp" alt="Cleide, do Restaurante Dona Fulo" width="350" height="261">
+        <span class="dep-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="dep-cap"><b>Cleide</b><span>Restaurante Dona Fulo</span><span class="mono">Assistir depoimento</span></span>
+      </a>
+      <a class="dep" href="https://vallorsolucoes.com.br/wp-content/uploads/2026/03/Kainpai-novo.mp4" target="_blank" rel="noopener">
+        <img src="img/dep-guilherme.webp" alt="Guilherme, do Restaurante Kanpai" width="336" height="262">
+        <span class="dep-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="dep-cap"><b>Guilherme</b><span>Restaurante Kanpai</span><span class="mono">Assistir depoimento</span></span>
+      </a>
+      <a class="dep" href="https://vallorsolucoes.com.br/wp-content/uploads/2026/03/Rancho-do-Pote.mp4" target="_blank" rel="noopener">
+        <img src="img/dep-rancho.webp" alt="Equipe usando o sistema no Rancho do pote" width="336" height="269">
+        <span class="dep-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="dep-cap"><b>Rancho do pote</b><span class="mono">Assistir depoimento</span></span>
+      </a>
+    </div>
+    <div class="proof-cta" data-reveal>
+      <a class="btn btn-red" data-magnetic href="https://vallorsolucoes.com.br/lp/#formulario" target="_blank" rel="noopener">Faça a Cotação para seu Negócio
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="paper band" id="gestao">
+  <div class="wrap">
+    <div class="pains">
+      <article class="pain" style="--i:0">
+        <span class="mono"><b>01</b>Sistema de Gestão Colibri</span>
+        <h3>Cansado de perder vendas, errar pedidos e não saber para onde seu dinheiro está indo?</h3>
+        <div class="pain-body">
+          <p>Com o sistema Colibri, sua operação fica organizada de verdade. Tenha um PDV rápido, controle de estoque eficiente e relatórios que mostram com clareza onde está o seu lucro.</p>
+          <a class="btn btn-red" href="#solucoes">Conhecer soluções</a>
+        </div>
+      </article>
+      <article class="pain" style="--i:1">
+        <span class="mono"><b>02</b>Consultoria Estratégica de Gestão</span>
+        <h3>Você sente que trabalha muito, mas o lucro não aparece no fim do mês?</h3>
+        <div class="pain-body">
+          <p>O problema pode não estar nas vendas — mas na gestão. Ajudamos você a organizar sua operação, ajustar custos e transformar números em lucro real.</p>
+          <a class="btn btn-white" href="https://vallorsolucoes.com.br/lp/#formulario" target="_blank" rel="noopener">Quero Aumentar meu Lucro</a>
+        </div>
+      </article>
+      <article class="pain" style="--i:2">
+        <span class="mono"><b>03</b>Suporte Humanizado 365 Dias</span>
+        <h3>E se o sistema parar no meio do serviço de sábado à noite?</h3>
+        <div class="pain-body">
+          <p>Para nossos clientes, isso não vira problema. Vira solução — com apenas uma ligação. Nosso suporte funciona 365 dias por ano, até meia-noite, garantindo que sua operação continue sem parar.</p>
+          <a class="btn btn-ink" href="https://vallorsolucoes.com.br/lp/#formulario" target="_blank" rel="noopener">Quero Ter Tranquilidade para Operar</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact band" id="contato">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="kicker mono">Contato</span>
+      <h2 class="h2">Vamos Conversar?</h2>
+      <p class="sub">Estamos prontos para ajudar seu restaurante a crescer. Entre em contato e descubra como podemos transformar sua gestão.</p>
+    </div>
+    <div class="contact-grid" data-stagger>
+      <a class="cc" href="https://api.whatsapp.com/send?phone=5531992162569" target="_blank" rel="noopener">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+        <small>WhatsApp Comercial</small><b>(31) 99216-2569</b>
+        <span class="cc-go">Abrir conversa <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="cc" href="https://api.whatsapp.com/send?phone=553132359999" target="_blank" rel="noopener">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span>
+        <small>WhatsApp Suporte</small><b>(31) 3235-9999</b>
+        <span class="cc-go">Abrir conversa <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="cc" href="https://www.instagram.com/vallor_automacao/" target="_blank" rel="noopener">
+        <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></span>
+        <small>Instagram</small><b>@vallor_automacao</b>
+        <span class="cc-go">Ver perfil <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot">
+  <div class="foot-mark" id="foot-mark" aria-hidden="true"><img src="img/logo.png" alt="" width="591" height="192"></div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#topo" aria-label="Vallor Automação, voltar ao início"><img src="img/logo.png" alt="Vallor Automação" width="591" height="192"></a>
+        <p class="foot-tag">Especialistas em tecnologia para o food service</p>
+      </div>
+      <div>
+        <h3>Atendimento</h3>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Telefone: <a href="tel:+553132359999">(31) 3235-9999</a></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Plantão: Seg. – Seg. 08:00 – 00:00</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Horário Comercial: Seg. – Sexta. 08:00 – 18:00</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Onde estamos</h3>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span><a href="mailto:contato@vallorsolucoes.com.br">contato@vallorsolucoes.com.br</a></span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>R. Domingos Vieira, 273 – sala 1002 – Santa Efigênia, Belo Horizonte – MG, 30150-240</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-end"><span>Vallor Automação</span><span>Belo Horizonte · MG</span></div>
+  </div>
+</footer>
+
+<script src="js/motion.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var root = document.documentElement;
+  var $ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var one = function(s){ return document.querySelector(s); };
+
+  /* menu no celular */
+  var btn = document.getElementById('menu-btn'), menu = document.getElementById('menu');
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  });
+  $('a', menu).forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); }); });
+
+  /* topo e botão do WhatsApp ao rolar */
+  var top = document.getElementById('topo'), fab = document.getElementById('fab');
+  var onScroll = function(){
+    top.classList.toggle('is-scrolled', window.scrollY > 8);
+    fab.classList.toggle('is-in', window.scrollY > 480);
+  };
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* plantão ao vivo: Seg. a Seg., 08:00 às 00:00, horário de Brasília */
+  function plantao(){
+    var h;
+    try { h = Number(new Intl.DateTimeFormat('pt-BR', {hour:'numeric', hour12:false, timeZone:'America/Sao_Paulo'}).format(new Date())); }
+    catch (e) { return; }
+    if (isNaN(h)) return;
+    var open = h >= 8 && h < 24;
+    $('[data-status]').forEach(function(el){
+      el.classList.toggle('is-open', open);
+      el.querySelector('[data-status-text]').textContent = open ? 'Plantão aberto agora, até 00:00' : 'Plantão volta às 08:00';
+    });
+  }
+  plantao(); setInterval(plantao, 60000);
+
+  var intro = document.getElementById('intro');
+  function killIntro(){ if (intro && intro.parentNode) intro.parentNode.removeChild(intro); root.classList.remove('has-intro'); }
+
+  var M = window.Motion;
+  if (!M || reduce) { killIntro(); return; }
+  root.classList.add('js-motion');
+  var ease = [0.2, 0.8, 0.2, 1], easeIO = [0.76, 0, 0.24, 1];
+  var vh = function(){ return window.innerHeight; };
+  var below = function(el){ return el.getBoundingClientRect().top > vh() * 0.92; };
+  var born = performance.now(), wait = function(){ return Math.max(0, tStart - (performance.now() - born) / 1000); }, tStart = 0;
+
+  /* quebra um texto em palavras animáveis */
+  function split(el, masked){
+    var out = [];
+    Array.prototype.slice.call(el.childNodes).forEach(function(node){
+      if (node.nodeType !== 3) return;
+      var frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(function(tok){
+        if (!tok) return;
+        if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(' ')); return; }
+        var inner = document.createElement('span');
+        inner.textContent = tok;
+        if (masked) {
+          var w = document.createElement('span'); w.className = 'w'; inner.className = 'wi';
+          w.appendChild(inner); frag.appendChild(w);
+        } else { inner.className = 'sw'; frag.appendChild(inner); }
+        out.push(inner);
+      });
+      el.replaceChild(frag, node);
+    });
+    return out;
+  }
+
+  /* barra de progresso da página */
+  M.scroll(M.animate('#progress', {scaleX:[0,1]}, {ease:'linear'}));
+
+  /* abertura */
+  var t0 = 0;
+  if (intro) {
+    t0 = 1.2; tStart = 1.35;
+    M.animate('.intro img', {opacity:[0,1], scale:[0.86,1]}, {duration:.6, ease:ease});
+    M.animate('.intro-bar i', {scaleX:[0,1]}, {duration:.85, ease:'easeInOut'});
+    M.animate(intro, {y:['0%','-100%']}, {delay:.98, duration:.75, ease:easeIO});
+    setTimeout(killIntro, 1850);
+  }
+
+  /* entrada do hero */
+  var h1 = document.getElementById('h1');
+  var h1w = split(h1, true);
+  h1w.forEach(function(w){ w.style.transform = 'translateY(118%)'; });
+  M.animate(h1w, {y:['118%','0%']}, {duration:.95, delay:M.stagger(.075, {startDelay:t0}), ease:ease});
+  var rise = $('.hero [data-rise]');
+  rise.forEach(function(el){ el.style.opacity = '0'; });
+  M.animate(rise, {opacity:[0,1], y:[26,0]}, {duration:.8, delay:M.stagger(.11, {startDelay:t0 + .3}), ease:ease});
+  var shots = $('.shot'), stamp = one('.stamp'), seal = one('.seal');
+  shots.forEach(function(el){ el.style.opacity = '0'; });
+  M.animate(shots, {opacity:[0,1], y:[70,0], scale:[0.86,1]}, {duration:1.1, delay:M.stagger(.16, {startDelay:t0 + .15}), ease:ease});
+  [stamp, seal].forEach(function(el){ el.style.opacity = '0'; });
+  M.animate(stamp, {scale:[1.4,1], rotate:[-10,-2], opacity:[0,1]}, {delay:t0 + .6, type:'spring', stiffness:320, damping:15});
+  M.animate(seal, {scale:[0,1], rotate:[-50,0], opacity:[0,1]}, {delay:t0 + .95, type:'spring', stiffness:200, damping:13});
+
+  /* foto do hero acompanha a rolagem */
+  var hero = document.getElementById('hero');
+  M.scroll(M.animate('.shot-a', {y:[0,70]}, {ease:'linear'}), {target:hero, offset:['start start','end start']});
+  M.scroll(M.animate('.shot-c', {y:[0,-40]}, {ease:'linear'}), {target:hero, offset:['start start','end start']});
+
+  /* fundo vivo do hero */
+  (function(){
+    var c = document.getElementById('aurora'), x = c.getContext('2d'), W = c.width, H = c.height, on = true, raf;
+    var blobs = [
+      {c:'209,10,32', a:.34, r:54, bx:.80, by:.20, ax:.14, ay:.16, s:.00023, p:0},
+      {c:'24,74,160', a:.50, r:70, bx:.18, by:.78, ax:.16, ay:.14, s:.00019, p:2},
+      {c:'209,10,32', a:.16, r:40, bx:.42, by:.96, ax:.22, ay:.10, s:.00027, p:4},
+      {c:'14,48,110', a:.55, r:58, bx:.55, by:.10, ax:.20, ay:.12, s:.00016, p:1}
+    ];
+    function draw(t){
+      x.globalCompositeOperation = 'source-over';
+      x.fillStyle = '#071E42'; x.fillRect(0, 0, W, H);
+      x.globalCompositeOperation = 'lighter';
+      blobs.forEach(function(b){
+        var px = (b.bx + Math.sin(t * b.s + b.p) * b.ax) * W, py = (b.by + Math.cos(t * b.s * 1.3 + b.p) * b.ay) * H;
+        var g = x.createRadialGradient(px, py, 0, px, py, b.r);
+        g.addColorStop(0, 'rgba(' + b.c + ',' + b.a + ')'); g.addColorStop(1, 'rgba(' + b.c + ',0)');
+        x.fillStyle = g; x.fillRect(0, 0, W, H);
+      });
+      if (on) raf = requestAnimationFrame(draw);
+    }
+    M.inView(hero, function(){ on = true; raf = requestAnimationFrame(draw); return function(){ on = false; cancelAnimationFrame(raf); }; });
+  })();
+
+  /* blocos entram quando chegam na tela */
+  $('.h2').forEach(function(h){
+    var ws = split(h, true), hide = below(h);
+    if (hide) ws.forEach(function(w){ w.style.transform = 'translateY(112%)'; });
+    M.inView(h, function(){ M.animate(ws, {y:['112%','0%']}, {duration:.85, delay:M.stagger(.055, {startDelay:wait()}), ease:ease}); }, {amount:.5});
+  });
+  $('[data-reveal]').forEach(function(el){
+    if (below(el)) el.style.opacity = '0';
+    M.inView(el, function(){ M.animate(el, {opacity:[0,1], y:[34,0]}, {duration:.8, delay:wait(), ease:ease}); }, {amount:.15});
+  });
+  $('[data-stagger]').forEach(function(group){
+    var kids = $(':scope > *', group);
+    if (below(group)) kids.forEach(function(k){ k.style.opacity = '0'; });
+    M.inView(group, function(){
+      var d = wait();
+      M.animate(kids, {opacity:[0,1], y:[40,0], scale:[0.96,1]}, {duration:.75, delay:M.stagger(.08, {startDelay:d}), ease:ease});
+      /* devolve o controle ao CSS para a inclinação e o hover */
+      setTimeout(function(){ kids.forEach(function(k){ k.style.transform = ''; k.style.opacity = ''; }); }, d * 1000 + 750 + kids.length * 80 + 250);
+    }, {amount:.1});
+  });
+
+  /* faixa vermelha anda junto com a rolagem */
+  M.scroll(M.animate('#ribbon-shift', {x:['2%','-14%']}, {ease:'linear'}), {target:document.getElementById('ribbon-wrap'), offset:['start end','end start']});
+
+  /* quem somos: o primeiro parágrafo acende palavra por palavra */
+  var lead = document.getElementById('about-lead');
+  var lw = split(lead, false);
+  M.scroll(M.animate(lw, {opacity:[0.16,1]}, {duration:.3, delay:M.stagger(.05), ease:'linear'}), {target:lead, offset:['start 88%','end 52%']});
+  var aphoto = one('.about-photo');
+  M.scroll(M.animate('.about-frame img', {y:[34,-34], scale:[1.14,1.14]}, {ease:'linear'}), {target:aphoto, offset:['start end','end start']});
+  M.scroll(M.animate('#about-red', {y:[-26,26], rotate:[-2,2]}, {ease:'linear'}), {target:aphoto, offset:['start end','end start']});
+
+  /* linha do tempo */
+  var tl = document.getElementById('timeline');
+  M.scroll(M.animate('.tl-progress', {scaleY:[0,1]}, {ease:'linear'}), {target:tl, offset:['start 62%','end 62%']});
+  $('.tl-item').forEach(function(it){
+    M.inView(it, function(){ it.classList.add('is-on'); return function(){ if (it.getBoundingClientRect().top > 0) it.classList.remove('is-on'); }; }, {margin:'0px 0px -36% 0px', amount:.3});
+  });
+
+  /* soluções: rolagem horizontal presa na tela */
+  (function(){
+    var sec = document.getElementById('solucoes'), pin = document.getElementById('sol-pin'), track = document.getElementById('sol-track');
+    var idx = document.getElementById('sol-idx'), bar = document.getElementById('sol-bar'), n = track.children.length, stops = [];
+    function clear(){ stops.forEach(function(f){ try { f(); } catch (e) {} }); stops = []; sec.classList.remove('is-pinned'); pin.style.height = ''; track.style.transform = ''; }
+    function setup(){
+      clear();
+      if (window.innerWidth < 981 || vh() < 700) return;
+      sec.classList.add('is-pinned');
+      var box = track.parentElement, cs = getComputedStyle(box);
+      var inner = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var travel = Math.max(0, track.scrollWidth - inner);
+      if (travel < 80) { clear(); return; }
+      pin.style.height = (vh() + travel) + 'px';
+      var opts = {target:pin, offset:['start start','end end']};
+      stops.push(M.scroll(M.animate(track, {x:[0, -travel]}, {ease:'linear'}), opts));
+      stops.push(M.scroll(function(p){
+        bar.style.transform = 'scaleX(' + p + ')';
+        var i = Math.min(n, Math.floor(p * n) + 1); idx.textContent = (i < 10 ? '0' : '') + i;
+      }, opts));
+    }
+    setup();
+    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(setup, 200); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+  })();
+
+  /* dores: o cartão de trás encolhe quando o próximo sobe */
+  var pains = $('.pain');
+  pains.forEach(function(card, i){
+    if (i === pains.length - 1) return;
+    M.scroll(M.animate(card, {scale:[1, 0.92 + i * 0.02]}, {ease:'linear'}), {target:pains[i + 1], offset:['start end','start 25%']});
+  });
+
+  /* contadores */
+  var fmt = new Intl.NumberFormat('pt-BR');
+  $('[data-count]').forEach(function(el){
+    var to = Number(el.getAttribute('data-count'));
+    M.inView(el, function(){
+      M.animate(0, to, {duration:2, ease:[0.16,1,0.3,1], onUpdate:function(v){ el.textContent = fmt.format(Math.round(v)); }});
+    }, {amount:.6});
+  });
+
+  /* marca gigante no rodapé */
+  M.scroll(M.animate('#foot-mark', {y:[90,0], opacity:[0,0.07]}, {ease:'linear'}), {target:document.getElementById('foot'), offset:['start end','end end']});
+
+  if (!fine) return;
+
+  /* luz que segue o mouse e foto inclinando no hero */
+  var hv = document.getElementById('hv');
+  hero.addEventListener('pointermove', function(e){
+    var r = hero.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+    hero.style.setProperty('--mx', (px * 100) + '%'); hero.style.setProperty('--my', (py * 100) + '%');
+    hv.style.setProperty('--ry', ((px - .5) * 9) + 'deg'); hv.style.setProperty('--rx', ((.5 - py) * 7) + 'deg');
+  });
+  hero.addEventListener('pointerleave', function(){ hv.style.setProperty('--ry', '0deg'); hv.style.setProperty('--rx', '0deg'); });
+
+  /* cartões inclinam e ganham brilho */
+  $('.pillar, .sol, .dep, .cc').forEach(function(el){
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      el.style.setProperty('--gx', (px * 100) + '%'); el.style.setProperty('--gy', (py * 100) + '%');
+      el.style.setProperty('--ry', ((px - .5) * 8) + 'deg'); el.style.setProperty('--rx', ((.5 - py) * 8) + 'deg');
+    });
+    el.addEventListener('pointerleave', function(){ el.style.setProperty('--ry', '0deg'); el.style.setProperty('--rx', '0deg'); });
+  });
+
+  /* botões magnéticos */
+  $('[data-magnetic]').forEach(function(el){
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect();
+      M.animate(el, {x:(e.clientX - r.left - r.width / 2) * .22, y:(e.clientY - r.top - r.height / 2) * .32}, {type:'spring', stiffness:260, damping:18});
+    });
+    el.addEventListener('pointerleave', function(){ M.animate(el, {x:0, y:0}, {type:'spring', stiffness:260, damping:14}); });
+  });
+})();
+</script>
+</body>
+</html>
