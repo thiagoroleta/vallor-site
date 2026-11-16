@@ -172,6 +172,31 @@ section{scroll-margin-top:84px}
 .about-photo{position:relative;margin:0 0 24px 24px}
 .about-red{position:absolute;inset:24px 24px -24px -24px;background:var(--red);border-radius:28px}
 .about-photo img{position:relative;border-radius:28px;width:100%;aspect-ratio:497/603;object-fit:cover;box-shadow:0 30px 60px -34px rgba(10,26,54,.7)}
+.spot-main{position:relative}
+.spot .about-frame{isolation:isolate}
+.spot-scan{position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(4,20,44,.07) 0 1px,transparent 1px 3px)}
+.spot-c{position:absolute;z-index:2;width:26px;height:26px;border:2px solid rgba(255,255,255,.85);pointer-events:none}
+.spot-c.tl{top:16px;left:16px;border-right:0;border-bottom:0;border-top-left-radius:8px}
+.spot-c.tr{top:16px;right:16px;border-left:0;border-bottom:0;border-top-right-radius:8px}
+.spot-c.bl{bottom:16px;left:16px;border-right:0;border-top:0;border-bottom-left-radius:8px}
+.spot-c.br{bottom:16px;right:16px;border-left:0;border-top:0;border-bottom-right-radius:8px}
+.spot-tag{position:absolute;z-index:2;top:26px;left:30px;display:inline-flex;align-items:center;gap:8px;background:rgba(4,20,44,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18)}
+.spot-tag i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(209,10,32,.7);animation:spotPulse 1.8s infinite}
+@keyframes spotPulse{0%{box-shadow:0 0 0 0 rgba(209,10,32,.7)}70%{box-shadow:0 0 0 9px rgba(209,10,32,0)}100%{box-shadow:0 0 0 0 rgba(209,10,32,0)}}
+.spot-cap{position:absolute;z-index:2;left:14px;right:14px;bottom:14px;display:grid;gap:2px;padding:18px 20px;border-radius:18px;background:linear-gradient(180deg,rgba(4,20,44,.55),rgba(4,20,44,.88));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);color:#fff}
+.spot-cap .mono{color:#FF8A96}
+.spot-cap b{font-family:var(--font-display,inherit);font-size:1.55rem;line-height:1.15;letter-spacing:-.01em}
+.spot-where{color:var(--on-navy-soft);font-size:.92rem}
+.spot-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.16)}
+.spot-stats div{display:grid;gap:2px}
+.spot-stats dt{color:var(--on-navy-soft);font-size:.66rem}
+.spot-stats dd{margin:0;font-weight:700;font-size:1.05rem}
+.spot-thumbs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:40px}
+.about-photo .spot-thumbs img{height:auto;aspect-ratio:4/3;border-radius:16px;box-shadow:0 18px 36px -24px rgba(10,26,54,.6);transition:transform .35s var(--ease)}
+.about-photo .spot-thumbs img:hover{transform:translateY(-4px)}
+.spot-note{margin-top:12px;font-size:.86rem;color:var(--ink-soft)}
+.spot-note a{color:var(--red-deep);font-weight:600}
+@media (prefers-reduced-motion:reduce){.spot-tag i{animation:none}.about-photo .spot-thumbs img{transition:none}}
 .mvv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(44px,6vw,72px)}
 .mvv article{background:var(--card);border:1px solid var(--line-ink);border-radius:var(--radius);padding:26px 24px;display:flex;flex-direction:column;gap:12px}
 .mvv h3{font-size:1.4rem;font-weight:700}
@@ -571,9 +596,30 @@ section{scroll-margin-top:84px}
           <p>Nosso diferencial está no suporte próximo, na experiência prática e na capacidade de resolver de verdade. A Vallor Automação não é apenas uma empresa de tecnologia. É uma parceira para o crescimento do seu restaurante.</p>
         </div>
       </div>
-      <figure class="about-photo" data-reveal>
-        <span class="about-red" id="about-red" aria-hidden="true"></span>
-        <div class="about-frame"><img src="img/sala.webp" alt="Sala de reuniões da Vallor Automação, com o logo na parede" width="497" height="603"></div>
+      <figure class="about-photo spot" data-reveal>
+        <div class="spot-main">
+          <span class="about-red" id="about-red" aria-hidden="true"></span>
+          <div class="about-frame">
+            <img src="img/cliente-bardamassa-telao.webp" alt="Telão de LED curvo do Bar da Massa, na sede do Galo, transmitindo uma partida" width="497" height="603">
+            <span class="spot-scan" aria-hidden="true"></span>
+            <span class="spot-c tl" aria-hidden="true"></span><span class="spot-c tr" aria-hidden="true"></span><span class="spot-c bl" aria-hidden="true"></span><span class="spot-c br" aria-hidden="true"></span>
+            <span class="spot-tag mono"><i aria-hidden="true"></i>Cliente Vallor</span>
+            <div class="spot-cap">
+              <span class="mono">Conheça um dos nossos clientes</span>
+              <b>Bar da Massa</b>
+              <span class="spot-where">Sede do Galo · Lourdes, BH</span>
+              <dl class="spot-stats">
+                <div><dt class="mono">Painéis de LED</dt><dd><span data-count="150">150</span> m²</dd></div>
+                <div><dt class="mono">Capacidade</dt><dd><span data-count="380">380</span> pessoas</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="spot-thumbs">
+          <img src="img/cliente-bardamassa-led.webp" alt="Painéis de LED do Bar da Massa com a marca da casa" width="560" height="420" loading="lazy">
+          <img src="img/cliente-bardamassa-fachada.webp" alt="Fachada do Bar da Massa, com letreiro sobre a parede perfurada" width="560" height="420" loading="lazy">
+        </div>
+        <figcaption class="spot-note">“O maior telão de LED indoor da América Latina”, segundo o Bar da Massa. <a href="https://www.instagram.com/bardamassaoficial/" target="_blank" rel="noopener">@bardamassaoficial</a></figcaption>
       </figure>
     </div>
     <div class="mvv" data-stagger>
